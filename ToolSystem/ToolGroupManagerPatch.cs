@@ -32,6 +32,20 @@ namespace ToolShortcuts
         [HarmonyPatch(typeof(ToolGroupManager), "ProcessInput")]
         public static class PatchProcessInput
         {
+            private static readonly FieldInfo ToolButtonServiceField;
+            private static readonly FieldInfo ToolGroupButtonsField;
+            private static readonly FieldInfo ToolGroupField;
+            
+            static PatchProcessInput()
+            {
+                ToolButtonServiceField = typeof(ToolManager).GetField("_toolButtonService",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+                ToolGroupButtonsField = typeof(ToolButtonService).GetField("_toolGroupButtons",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+                ToolGroupField = typeof(ToolGroupButton).GetField("_toolGroup",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+            }
+            
             private static void Postfix(ref bool? __result, ToolGroupManager __instance, ToolManager ____toolManager)
             {
                 if (Plugin.ExtendedInputService.SwitchToolGroup.HasValue)
@@ -45,12 +59,12 @@ namespace ToolShortcuts
 
             private static bool SwitchToolGroup(ToolGroupName toolGroupName, ToolGroupManager instance, ToolManager toolManager)
             {
-                ToolButtonService toolButtonService = (ToolButtonService)typeof(ToolManager).GetField("_toolButtonService", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(toolManager);
-                List<ToolGroupButton> toolGroupButtons = (List<ToolGroupButton>)typeof(ToolButtonService).GetField("_toolGroupButtons", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(toolButtonService);
+                ToolButtonService toolButtonService = (ToolButtonService) ToolButtonServiceField.GetValue(toolManager);
+                List<ToolGroupButton> toolGroupButtons = (List<ToolGroupButton>) ToolGroupButtonsField.GetValue(toolButtonService);
 
                 foreach (ToolGroupButton groupBtn in toolGroupButtons)
                 {
-                    ToolGroup toolGroup = (ToolGroup)typeof(ToolGroupButton).GetField("_toolGroup", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(groupBtn);
+                    ToolGroup toolGroup = (ToolGroup) ToolGroupField.GetValue(groupBtn);
 
                     if (ToolGroupNameHelper.FromNameLockey(toolGroup.DisplayNameLocKey) == toolGroupName)
                     {
