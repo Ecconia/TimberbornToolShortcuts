@@ -12,6 +12,9 @@ namespace ToolShortcuts
 
         public List<KeyControl> Tools;
 
+        //Field is static, as it will be called from a static context (Harmony patch).
+        public static bool DirectlyOpenFirstToolInGroup;
+
         public KeyBindings()
         {
             Plugin.KeyBindings = this;
@@ -61,6 +64,8 @@ namespace ToolShortcuts
                 ConfigEntryToKeyControl(KeyBindingsConfig.tool15),
                 ConfigEntryToKeyControl(KeyBindingsConfig.tool16),
             };
+
+            DirectlyOpenFirstToolInGroup = KeyBindingsConfig.directlyOpenFirstToolInGroup.Value;
         }
 
         private static KeyControl ConfigEntryToKeyControl(ConfigEntry<string> configEntry)

@@ -35,6 +35,7 @@ namespace ToolShortcuts
             private static readonly FieldInfo ToolButtonServiceField;
             private static readonly FieldInfo ToolGroupButtonsField;
             private static readonly FieldInfo ToolGroupField;
+            private static readonly FieldInfo ToolButtonsField;
             
             static PatchProcessInput()
             {
@@ -43,6 +44,8 @@ namespace ToolShortcuts
                 ToolGroupButtonsField = typeof(ToolButtonService).GetField("_toolGroupButtons",
                     BindingFlags.NonPublic | BindingFlags.Instance);
                 ToolGroupField = typeof(ToolGroupButton).GetField("_toolGroup",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+                ToolButtonsField = typeof(ToolGroupButton).GetField("_toolButtons",
                     BindingFlags.NonPublic | BindingFlags.Instance);
             }
             
@@ -75,6 +78,11 @@ namespace ToolShortcuts
                         else
                         {
                             instance.SwitchToolGroup(toolGroup);
+                            if (KeyBindings.DirectlyOpenFirstToolInGroup)
+                            {
+                                List<ToolButton> toolButtons = (List<ToolButton>)ToolButtonsField.GetValue(groupBtn);
+                                toolManager.SwitchTool(toolButtons[0].Tool);
+                            }
                         }
                         return true;
                     }

@@ -42,6 +42,8 @@ namespace ToolShortcuts
         public static ConfigEntry<string> tool14;
         public static ConfigEntry<string> tool15;
         public static ConfigEntry<string> tool16;
+        
+        public static ConfigEntry<bool> directlyOpenFirstToolInGroup;
 
         public static void Bind(ConfigFile configFile)
         {
@@ -83,6 +85,8 @@ namespace ToolShortcuts
             tool14 = configFile.Bind("Key bindings", "tool14", "");
             tool15 = configFile.Bind("Key bindings", "tool15", "");
             tool16 = configFile.Bind("Key bindings", "tool16", "");
+
+            directlyOpenFirstToolInGroup = configFile.Bind("Behavior configuration", "directlyOpenFirstToolInGroup", false);
         }
     }
 }
