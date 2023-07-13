@@ -11,17 +11,15 @@ namespace ToolShortcuts
 	[BepInPlugin("Timberborn.ToolShortcuts", "Tool Shortcuts", "0.3.2")]
 	public class Plugin : BaseUnityPlugin
 	{
-		internal static ManualLogSource Log;
-		internal static KeyBindings KeyBindings;
-		internal static ExtendedInputService ExtendedInputService;
-		internal static List<ToolButton> ActiveToolGroupButtons;
+		public static ManualLogSource Log;
+		public static KeyBindings KeyBindings;
+		public static ExtendedInputService ExtendedInputService;
+		public static List<ToolButton> ActiveToolGroupButtons;
 		
 		private void Awake()
 		{
-			Log = base.Logger;
-			
+			Log = Logger;
 			KeyBindingsConfig.Bind(Config);
-			
 			Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 		}
 	}

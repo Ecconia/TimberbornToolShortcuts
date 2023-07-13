@@ -5,7 +5,7 @@ using ToolShortcuts.InputSystem;
 
 namespace ToolShortcuts
 {
-	class MasterSceneConfiguratorPatch
+	public static class MasterSceneConfiguratorPatch
 	{
 		[HarmonyPatch(typeof(GameSceneConfigurator), "Configure")]
 		public static class ConfigurePatch

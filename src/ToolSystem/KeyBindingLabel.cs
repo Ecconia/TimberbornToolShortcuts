@@ -3,11 +3,10 @@ using UnityEngine.UIElements;
 
 namespace ToolShortcuts.ToolSystem
 {
-	class KeyBindingLabel : Label
+	public class KeyBindingLabel : Label
 	{
-		public KeyBindingLabel(string keyBindingText)
+		public KeyBindingLabel(string keyBindingText) : base(keyBindingText)
 		{
-			text = keyBindingText;
 			style.position = Position.Absolute;
 			style.top = 4;
 			style.left = 0;

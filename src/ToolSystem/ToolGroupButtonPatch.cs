@@ -6,12 +6,12 @@ using UnityEngine.UIElements;
 
 namespace ToolShortcuts.ToolSystem
 {
-	class ToolGroupButtonPatch
+	public static class ToolGroupButtonPatch
 	{
 		[HarmonyPatch(typeof(ToolGroupButton), "PostLoad")]
 		public static class PatchPostLoad
 		{
-			private static void Postfix(ToolGroupButton __instance, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
+			private static void Postfix(ToolGroupButton __instance, ToolGroup ____toolGroup, IReadOnlyList<ToolButton> ____toolButtons)
 			{
 				DisplayGroupBindingLabel(__instance.Root, ____toolGroup);
 				DisplayGroupButtonsLabels(____toolButtons);
@@ -19,24 +19,32 @@ namespace ToolShortcuts.ToolSystem
 			
 			private static void DisplayGroupBindingLabel(VisualElement root, ToolGroup toolGroup)
 			{
-				ToolGroupName? groupName = ToolGroupNameHelper.FromNameLockey(toolGroup.DisplayNameLocKey);
-				if (!groupName.HasValue) return;
+				var groupName = ToolGroupNameHelper.FromNameLockey(toolGroup.DisplayNameLocKey);
+				if(!groupName.HasValue)
+				{
+					return;
+				}
 				
-				KeyControl keyControl = Plugin.KeyBindings.GroupTools.GetValueOrDefault(groupName.Value, null);
-				if (keyControl == null) return;
+				var keyControl = Plugin.KeyBindings.GroupTools.GetValueOrDefault(groupName.Value, null);
+				if(keyControl == null)
+				{
+					return;
+				}
 				
-				KeyBindingLabel label = new KeyBindingLabel(keyControl.displayName);
+				var label = new KeyBindingLabel(keyControl.displayName);
 				label.style.left = 6;
 				root.Add(label);
 			}
 			
-			private static void DisplayGroupButtonsLabels(List<ToolButton> toolButtons)
+			private static void DisplayGroupButtonsLabels(IReadOnlyList<ToolButton> toolButtons)
 			{
-				for (int i = 0; i < toolButtons.Count && i < Plugin.KeyBindings.Tools.Count; i++)
+				for(int i = 0; i < toolButtons.Count && i < Plugin.KeyBindings.Tools.Count; i++)
 				{
 					KeyControl keyControl = Plugin.KeyBindings.Tools[i];
-					if (keyControl == null) continue;
-					
+					if(keyControl == null)
+					{
+						continue;
+					}
 					toolButtons[i].Root.Add(new KeyBindingLabel(keyControl.displayName));
 				}
 			}
@@ -47,7 +55,7 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
 			{
-				if (toolGroupEnteredEvent.ToolGroup == ____toolGroup)
+				if(toolGroupEnteredEvent.ToolGroup == ____toolGroup)
 				{
 					Plugin.ActiveToolGroupButtons = ____toolButtons;
 				}
@@ -59,7 +67,7 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
 			{
-				if (toolGroupExitedEvent.ToolGroup == ____toolGroup)
+				if(toolGroupExitedEvent.ToolGroup == ____toolGroup)
 				{
 					Plugin.ActiveToolGroupButtons = null;
 				}

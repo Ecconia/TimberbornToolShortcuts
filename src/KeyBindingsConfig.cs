@@ -2,7 +2,7 @@ using BepInEx.Configuration;
 
 namespace ToolShortcuts
 {
-	static class KeyBindingsConfig
+	public static class KeyBindingsConfig
 	{
 		public static ConfigEntry<string> treeCuttingGroupTool;
 		public static ConfigEntry<string> fieldsPlantingGroupTool;

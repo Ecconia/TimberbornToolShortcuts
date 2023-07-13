@@ -1,15 +1,13 @@
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using Timberborn.InputSystem;
 using ToolShortcuts.ToolSystem;
 
 namespace ToolShortcuts.InputSystem
 {
-	class ExtendedInputService
+	public class ExtendedInputService
 	{
-		private KeyboardController _keyboard;
-		private KeyBindings _keyBindings;
+		private readonly KeyboardController _keyboard;
+		private readonly KeyBindings _keyBindings;
 		
 		public ExtendedInputService(KeyboardController keyboardController, KeyBindings keyBindings)
 		{
@@ -22,11 +20,11 @@ namespace ToolShortcuts.InputSystem
 		{
 			get
 			{
-				if (!_keyboard.IsKeyHeld(Key.LeftShift))
+				if(!_keyboard.IsKeyHeld(Key.LeftShift))
 				{
-					for (int i = 0; i < _keyBindings.Tools.Count; i++)
+					for(int i = 0; i < _keyBindings.Tools.Count; i++)
 					{
-						if (_keyBindings.Tools[i] != null && _keyboard.IsKeyDown(_keyBindings.Tools[i].keyCode))
+						if(_keyBindings.Tools[i] != null && _keyboard.IsKeyDown(_keyBindings.Tools[i].keyCode))
 						{
 							return i;
 						}
@@ -40,11 +38,11 @@ namespace ToolShortcuts.InputSystem
 		{
 			get
 			{
-				if (!_keyboard.IsKeyHeld(Key.LeftShift))
+				if(!_keyboard.IsKeyHeld(Key.LeftShift))
 				{
-					foreach (KeyValuePair<ToolGroupName, KeyControl> entry in _keyBindings.GroupTools)
+					foreach(var entry in _keyBindings.GroupTools)
 					{
-						if (entry.Value != null && _keyboard.IsKeyDown(entry.Value.keyCode))
+						if(entry.Value != null && _keyboard.IsKeyDown(entry.Value.keyCode))
 						{
 							return entry.Key;
 						}

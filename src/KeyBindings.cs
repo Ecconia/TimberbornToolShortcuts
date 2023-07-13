@@ -10,7 +10,6 @@ namespace ToolShortcuts
 	public class KeyBindings : ILoadableSingleton
 	{
 		public Dictionary<ToolGroupName, KeyControl> GroupTools;
-		
 		public List<KeyControl> Tools;
 		
 		//Field is static, as it will be called from a static context (Harmony patch).
@@ -23,31 +22,33 @@ namespace ToolShortcuts
 		
 		public void Load()
 		{
-			GroupTools = new Dictionary<ToolGroupName, KeyControl> {
-				{ ToolGroupName.TreeCutting, ConfigEntryToKeyControl(KeyBindingsConfig.treeCuttingGroupTool) },
-				{ ToolGroupName.FieldsPlanting, ConfigEntryToKeyControl(KeyBindingsConfig.fieldsPlantingGroupTool) },
-				{ ToolGroupName.ForestryPlanting, ConfigEntryToKeyControl(KeyBindingsConfig.forestryPlantingGroupTool) },
-				{ ToolGroupName.Demolishing, ConfigEntryToKeyControl(KeyBindingsConfig.demolishingGroupTool) },
-				{ ToolGroupName.Priority, ConfigEntryToKeyControl(KeyBindingsConfig.priorityGroupTool) },
-				{ ToolGroupName.Paths, ConfigEntryToKeyControl(KeyBindingsConfig.pathsGroupTool) },
-				{ ToolGroupName.Landscaping, ConfigEntryToKeyControl(KeyBindingsConfig.landscapingGroupTool) },
-				{ ToolGroupName.Storage, ConfigEntryToKeyControl(KeyBindingsConfig.storageGroupTool) },
-				{ ToolGroupName.Labor, ConfigEntryToKeyControl(KeyBindingsConfig.laborGroupTool) },
-				{ ToolGroupName.Housing, ConfigEntryToKeyControl(KeyBindingsConfig.housingGroupTool) },
-				{ ToolGroupName.Water, ConfigEntryToKeyControl(KeyBindingsConfig.waterGroupTool) },
-				{ ToolGroupName.Food, ConfigEntryToKeyControl(KeyBindingsConfig.foodGroupTool) },
-				{ ToolGroupName.Wood, ConfigEntryToKeyControl(KeyBindingsConfig.woodGroupTool) },
-				{ ToolGroupName.Metal, ConfigEntryToKeyControl(KeyBindingsConfig.metalGroupTool) },
-				{ ToolGroupName.Power, ConfigEntryToKeyControl(KeyBindingsConfig.powerGroupTool) },
-				{ ToolGroupName.Science, ConfigEntryToKeyControl(KeyBindingsConfig.scienceGroupTool) },
-				{ ToolGroupName.Leisure, ConfigEntryToKeyControl(KeyBindingsConfig.leisureGroupTool) },
-				{ ToolGroupName.Decoration, ConfigEntryToKeyControl(KeyBindingsConfig.decorationGroupTool) },
-				{ ToolGroupName.Monuments, ConfigEntryToKeyControl(KeyBindingsConfig.monumentsGroupTool) },
-				{ ToolGroupName.MapEditor, ConfigEntryToKeyControl(KeyBindingsConfig.mapEditorGroupTool) },
-				{ ToolGroupName.Ruins, ConfigEntryToKeyControl(KeyBindingsConfig.ruinsGroupTool) },
+			GroupTools = new Dictionary<ToolGroupName, KeyControl>
+			{
+				{ToolGroupName.TreeCutting, ConfigEntryToKeyControl(KeyBindingsConfig.treeCuttingGroupTool)},
+				{ToolGroupName.FieldsPlanting, ConfigEntryToKeyControl(KeyBindingsConfig.fieldsPlantingGroupTool)},
+				{ToolGroupName.ForestryPlanting, ConfigEntryToKeyControl(KeyBindingsConfig.forestryPlantingGroupTool)},
+				{ToolGroupName.Demolishing, ConfigEntryToKeyControl(KeyBindingsConfig.demolishingGroupTool)},
+				{ToolGroupName.Priority, ConfigEntryToKeyControl(KeyBindingsConfig.priorityGroupTool)},
+				{ToolGroupName.Paths, ConfigEntryToKeyControl(KeyBindingsConfig.pathsGroupTool)},
+				{ToolGroupName.Landscaping, ConfigEntryToKeyControl(KeyBindingsConfig.landscapingGroupTool)},
+				{ToolGroupName.Storage, ConfigEntryToKeyControl(KeyBindingsConfig.storageGroupTool)},
+				{ToolGroupName.Labor, ConfigEntryToKeyControl(KeyBindingsConfig.laborGroupTool)},
+				{ToolGroupName.Housing, ConfigEntryToKeyControl(KeyBindingsConfig.housingGroupTool)},
+				{ToolGroupName.Water, ConfigEntryToKeyControl(KeyBindingsConfig.waterGroupTool)},
+				{ToolGroupName.Food, ConfigEntryToKeyControl(KeyBindingsConfig.foodGroupTool)},
+				{ToolGroupName.Wood, ConfigEntryToKeyControl(KeyBindingsConfig.woodGroupTool)},
+				{ToolGroupName.Metal, ConfigEntryToKeyControl(KeyBindingsConfig.metalGroupTool)},
+				{ToolGroupName.Power, ConfigEntryToKeyControl(KeyBindingsConfig.powerGroupTool)},
+				{ToolGroupName.Science, ConfigEntryToKeyControl(KeyBindingsConfig.scienceGroupTool)},
+				{ToolGroupName.Leisure, ConfigEntryToKeyControl(KeyBindingsConfig.leisureGroupTool)},
+				{ToolGroupName.Decoration, ConfigEntryToKeyControl(KeyBindingsConfig.decorationGroupTool)},
+				{ToolGroupName.Monuments, ConfigEntryToKeyControl(KeyBindingsConfig.monumentsGroupTool)},
+				{ToolGroupName.MapEditor, ConfigEntryToKeyControl(KeyBindingsConfig.mapEditorGroupTool)},
+				{ToolGroupName.Ruins, ConfigEntryToKeyControl(KeyBindingsConfig.ruinsGroupTool)},
 			};
 			
-			Tools = new List<KeyControl> {
+			Tools = new List<KeyControl>
+			{
 				ConfigEntryToKeyControl(KeyBindingsConfig.tool1),
 				ConfigEntryToKeyControl(KeyBindingsConfig.tool2),
 				ConfigEntryToKeyControl(KeyBindingsConfig.tool3),
@@ -72,7 +73,7 @@ namespace ToolShortcuts
 		private static KeyControl ConfigEntryToKeyControl(ConfigEntry<string> configEntry)
 		{
 			string value = configEntry.Value.ToLower();
-			return value != "" ? (KeyControl)Keyboard.current[value] : null;
+			return value != "" ? (KeyControl) Keyboard.current[value] : null;
 		}
 	}
 }
