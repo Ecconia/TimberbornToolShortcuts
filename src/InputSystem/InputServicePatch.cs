@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Timberborn.InputSystem;
 
-namespace ToolShortcuts
+namespace ToolShortcuts.InputSystem
 {
     class InputServicePatch
     {

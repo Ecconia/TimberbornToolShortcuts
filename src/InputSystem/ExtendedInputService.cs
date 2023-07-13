@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using Timberborn.InputSystem;
+using ToolShortcuts.ToolSystem;
 
-namespace ToolShortcuts
+namespace ToolShortcuts.InputSystem
 {
     class ExtendedInputService
     {

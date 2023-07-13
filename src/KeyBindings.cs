@@ -1,6 +1,7 @@
 using BepInEx.Configuration;
 using System.Collections.Generic;
 using Timberborn.SingletonSystem;
+using ToolShortcuts.ToolSystem;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 

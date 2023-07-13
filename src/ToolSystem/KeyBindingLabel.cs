@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace ToolShortcuts
+namespace ToolShortcuts.ToolSystem
 {
     class KeyBindingLabel : Label
     {

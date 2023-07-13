@@ -4,7 +4,7 @@ using Timberborn.ToolSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UIElements;
 
-namespace ToolShortcuts
+namespace ToolShortcuts.ToolSystem
 {
     class ToolGroupButtonPatch
     {

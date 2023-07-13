@@ -2,7 +2,7 @@ using HarmonyLib;
 using System.Linq;
 using Timberborn.ToolSystem;
 
-namespace ToolShortcuts
+namespace ToolShortcuts.ToolSystem
 {
     class ToolManagerPatch
     {

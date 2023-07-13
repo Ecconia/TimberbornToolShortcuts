@@ -1,4 +1,4 @@
-namespace ToolShortcuts
+namespace ToolShortcuts.ToolSystem
 {
     public enum ToolGroupName
     {

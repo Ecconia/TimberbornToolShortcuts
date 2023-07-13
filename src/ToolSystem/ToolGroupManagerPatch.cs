@@ -4,7 +4,7 @@ using System.Reflection;
 using Timberborn.InputSystem;
 using Timberborn.ToolSystem;
 
-namespace ToolShortcuts
+namespace ToolShortcuts.ToolSystem
 {
     class ToolGroupManagerPatch
     {

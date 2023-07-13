@@ -1,6 +1,7 @@
 using Bindito.Core;
 using HarmonyLib;
 using Timberborn.GameScene;
+using ToolShortcuts.InputSystem;
 
 namespace ToolShortcuts
 {

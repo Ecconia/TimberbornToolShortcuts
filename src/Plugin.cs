@@ -4,6 +4,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
 using Timberborn.ToolSystem;
+using ToolShortcuts.InputSystem;
 
 namespace ToolShortcuts
 {
