@@ -8,7 +8,7 @@ using ToolShortcuts.InputSystem;
 
 namespace ToolShortcuts
 {
-	[BepInPlugin("Timberborn.ToolShortcuts", "Tool Shortcuts", "0.3.2")]
+	[BepInPlugin("Timberborn.ToolShortcuts", "Tool Shortcuts", "0.4.0")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static ManualLogSource Log;
