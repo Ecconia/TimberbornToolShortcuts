@@ -13,10 +13,9 @@ Note: Time speed controls have been reassigned to ALT-1, ALT-2, ALT-3
 
 ![Demo](https://github.com/zallek/TimberbornToolShortcuts/raw/main/demo.gif)
 
-
 ## Requirements
 
-- [BepInExPack Timberborn](https://timberborn.thunderstore.io/package/BepInEx/BepInExPack_Timberborn/)
+- [BepInExPack for Timberborn](https://mod.io/g/timberborn/m/bepinexpack/)
 
 ## Installation
 

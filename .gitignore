@@ -1,5 +1,8 @@
-.vscode/
+# IDE:
+/.idea/
+/.vscode/
+# Project:
+/Timberborn/
+# CSharp:
 bin/
 obj/
-libs/
-dist/
