@@ -55,10 +55,11 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
 			{
-				if(toolGroupEnteredEvent.ToolGroup == ____toolGroup)
+				if(toolGroupEnteredEvent.ToolGroup != ____toolGroup)
 				{
-					Plugin.ActiveToolGroupButtons = ____toolButtons;
+					return;
 				}
+				Plugin.ActiveToolGroupButtons = ____toolButtons;
 			}
 		}
 		
@@ -67,10 +68,12 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
 			{
-				if(toolGroupExitedEvent.ToolGroup == ____toolGroup)
+				//TimberAPI has the habit of replacing references, means one has to default to comparing strings.
+				if(!____toolGroup.DisplayNameLocKey.Equals(toolGroupExitedEvent.ToolGroup?.DisplayNameLocKey))
 				{
-					Plugin.ActiveToolGroupButtons = null;
+					return;
 				}
+				Plugin.ActiveToolGroupButtons = null;
 			}
 		}
 	}

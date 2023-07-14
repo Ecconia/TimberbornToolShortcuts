@@ -49,11 +49,12 @@ namespace ToolShortcuts.ToolSystem
 					BindingFlags.NonPublic | BindingFlags.Instance);
 			}
 			
-			private static void Postfix(ref bool? __result, ToolGroupManager __instance, ToolManager ____toolManager)
+			private static void Postfix(ref bool __result, ToolGroupManager __instance, ToolManager ____toolManager)
 			{
-				if(Plugin.ExtendedInputService.SwitchToolGroup.HasValue)
+				var toolGroupName = Plugin.ExtendedInputService.SwitchToolGroup;
+				if(toolGroupName.HasValue)
 				{
-					if(SwitchToolGroup(Plugin.ExtendedInputService.SwitchToolGroup.Value, __instance, ____toolManager))
+					if(SwitchToolGroup(toolGroupName.Value, __instance, ____toolManager))
 					{
 						__result = true;
 					}

@@ -11,9 +11,10 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ref bool? __result, ToolManager __instance)
 			{
-				if(Plugin.ExtendedInputService.SwitchTool.HasValue)
+				var toolIndex = Plugin.ExtendedInputService.SwitchTool;
+				if(toolIndex.HasValue)
 				{
-					if(SwitchTool(Plugin.ExtendedInputService.SwitchTool.Value, __instance))
+					if(SwitchTool(toolIndex.Value, __instance))
 					{
 						__result = true;
 					}

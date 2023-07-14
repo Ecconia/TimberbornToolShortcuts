@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>Timberborn.ToolShortcuts</AssemblyName>
     <Description>Tool shortcurs for Timberborn</Description>
-    <Version>0.4.0</Version>
+    <Version>0.4.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>9.0</LangVersion>
     <RootNamespace>ToolShortcuts</RootNamespace>
@@ -25,9 +25,6 @@
     </Reference>
     <Reference Include="Timberborn.InputSystem">
       <HintPath>Timberborn/Timberborn.InputSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Timberborn.MasterScene">
-      <HintPath>Timberborn/Timberborn.MasterScene.dll</HintPath>
     </Reference>
     <Reference Include="Timberborn.SingletonSystem">
       <HintPath>Timberborn/Timberborn.SingletonSystem.dll</HintPath>

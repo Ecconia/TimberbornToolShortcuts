@@ -20,7 +20,7 @@ namespace ToolShortcuts.InputSystem
 		{
 			get
 			{
-				if(!_keyboard.IsKeyHeld(Key.LeftShift))
+				if(!_keyboard.IsKeyHeld(Key.LeftShift) && !_keyboard.IsKeyHeld(Key.LeftAlt))
 				{
 					for(int i = 0; i < _keyBindings.Tools.Count; i++)
 					{
@@ -38,7 +38,7 @@ namespace ToolShortcuts.InputSystem
 		{
 			get
 			{
-				if(!_keyboard.IsKeyHeld(Key.LeftShift))
+				if(!_keyboard.IsKeyHeld(Key.LeftShift) && !_keyboard.IsKeyHeld(Key.LeftAlt))
 				{
 					foreach(var entry in _keyBindings.GroupTools)
 					{
