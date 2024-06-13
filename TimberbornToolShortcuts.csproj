@@ -14,22 +14,47 @@
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.19.0" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Bindito.Core">
       <HintPath>Timberborn/Bindito.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Timberborn.GameScene">
+    <Reference Include="Bindito.Unity">
+      <HintPath>Timberborn\Bindito.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.CoreUI" Publicize="true">
+      <HintPath>Timberborn\Timberborn.CoreUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.GameScene" Publicize="true">
       <HintPath>Timberborn\Timberborn.GameScene.dll</HintPath>
     </Reference>
     <Reference Include="Timberborn.InputSystem">
       <HintPath>Timberborn/Timberborn.InputSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Timberborn.SingletonSystem">
+    <Reference Include="Timberborn.KeyBindingSystem" Publicize="true">
+      <HintPath>Timberborn\Timberborn.KeyBindingSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.KeyBindingSystemUI">
+      <HintPath>Timberborn\Timberborn.KeyBindingSystemUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.MainMenuScene" Publicize="true">
+      <HintPath>Timberborn\Timberborn.MainMenuScene.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.MapEditorScene" Publicize="true">
+      <HintPath>Timberborn\Timberborn.MapEditorScene.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.SettingsSystem">
+      <HintPath>Timberborn\Timberborn.SettingsSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.SettingsSystemUI" Publicize="true">
+      <HintPath>Timberborn\Timberborn.SettingsSystemUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Timberborn.SingletonSystem" Publicize="true">
       <HintPath>Timberborn/Timberborn.SingletonSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Timberborn.ToolSystem">
+    <Reference Include="Timberborn.ToolSystem" Publicize="true">
       <HintPath>Timberborn/Timberborn.ToolSystem.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
@@ -40,6 +65,9 @@
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>Timberborn/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>Timberborn\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
       <HintPath>Timberborn/UnityEngine.UIElementsModule.dll</HintPath>

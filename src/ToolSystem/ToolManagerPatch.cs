@@ -1,6 +1,7 @@
 using HarmonyLib;
 using System.Linq;
 using Timberborn.ToolSystem;
+using ToolShortcuts.Keybindings;
 
 namespace ToolShortcuts.ToolSystem
 {
@@ -11,8 +12,8 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ref bool? __result, ToolManager __instance)
 			{
-				var toolIndex = Plugin.ExtendedInputService.SwitchTool;
-				if(toolIndex.HasValue)
+				var toolIndex = IsToolIndexKeybindingDown;
+				if(toolIndex != null)
 				{
 					if(SwitchTool(toolIndex.Value, __instance))
 					{
@@ -23,13 +24,32 @@ namespace ToolShortcuts.ToolSystem
 			
 			private static bool SwitchTool(int toolIndex, ToolManager instance)
 			{
-				if(Plugin.ActiveToolGroupButtons != null && toolIndex < Plugin.ActiveToolGroupButtons.Count())
+				var activeToolGroupButtons = ActiveToolGroupTrackingPatch.activeToolGroupButtons;
+				if(activeToolGroupButtons != null && toolIndex < activeToolGroupButtons.Count())
 				{
-					var tool = Plugin.ActiveToolGroupButtons.ElementAt(toolIndex).Tool;
+					var tool = activeToolGroupButtons.ElementAt(toolIndex).Tool;
 					instance.SwitchTool(tool);
 					return true;
 				}
 				return false;
+			}
+			
+			private static int? IsToolIndexKeybindingDown
+			{
+				get
+				{
+					var inputService = DependencyExtractorSingletonGameplay.getInputService();
+					int index = 0;
+					foreach(var toolIndexKeybinding in KeybindingKeys.ToolIndex.allToolIndices)
+					{
+						if (inputService.IsKeyDown(toolIndexKeybinding))
+						{
+							return index;
+						}
+						index++;
+					}
+					return null;
+				}
 			}
 		}
 	}

@@ -1,15 +1,13 @@
-# Tool shortcuts for Timberborn
+# Mod ToolShortcuts for Timberborn
 
-Add key bindinds on the bottom tool bar
+Adds the ability to assign keybindings to vanilla tool groups in your toolbar and keybindings to switch between tools.
 
-Default config:
-- G: Open Tree Cutting tools
-- F: Open Field Planting tools
-- T: Open Forestry Planting tools
-- X: Open Demolishing tools
-- 1, 2, 3, ...10: Select tool
-
-Note: Time speed controls have been reassigned to ALT-1, ALT-2, ALT-3
+Default config (no collision with vanilla keybindings):
+- `Shift + G`: Open Tree Cutting tools
+- `Shift + F`: Open Field Planting tools
+- `Shift + T`: Open Forestry Planting tools
+- `X`: Open Demolishing tools
+- `Shift + 1, Shift + 2, ..., Shift + 9, Shift + 10`: Select tool
 
 ![Demo](https://github.com/zallek/TimberbornToolShortcuts/raw/main/demo.gif)
 
@@ -19,8 +17,9 @@ Note: Time speed controls have been reassigned to ALT-1, ALT-2, ALT-3
 
 ## Installation
 
-- Decompress the zip archive in your plugins folder `BepInEx\plugins`.
+- Decompress the zip archive in your plugins folder `BepInEx\plugins\`.
 
 ## Configuration
 
-- Add or change key bindings using the plugin configuration file in `BepInEx\config`.
+- You can assign/change keybindings easily via the vanilla keybindings settings.
+- In the main settings, you can choose if the first tool should automatically be selected when opening a tool group by keybinding.

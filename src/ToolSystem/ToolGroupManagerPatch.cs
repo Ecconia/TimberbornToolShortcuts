@@ -1,8 +1,7 @@
 using HarmonyLib;
-using System.Collections.Generic;
-using System.Reflection;
 using Timberborn.InputSystem;
 using Timberborn.ToolSystem;
+using ToolShortcuts.Keybindings;
 
 namespace ToolShortcuts.ToolSystem
 {
@@ -32,44 +31,40 @@ namespace ToolShortcuts.ToolSystem
 		[HarmonyPatch(typeof(ToolGroupManager), "ProcessInput")]
 		public static class PatchProcessInput
 		{
-			private static readonly FieldInfo ToolButtonServiceField;
-			private static readonly FieldInfo ToolGroupButtonsField;
-			private static readonly FieldInfo ToolGroupField;
-			private static readonly FieldInfo ToolButtonsField;
-			
-			static PatchProcessInput()
-			{
-				ToolButtonServiceField = typeof(ToolManager).GetField("_toolButtonService",
-					BindingFlags.NonPublic | BindingFlags.Instance);
-				ToolGroupButtonsField = typeof(ToolButtonService).GetField("_toolGroupButtons",
-					BindingFlags.NonPublic | BindingFlags.Instance);
-				ToolGroupField = typeof(ToolGroupButton).GetField("_toolGroup",
-					BindingFlags.NonPublic | BindingFlags.Instance);
-				ToolButtonsField = typeof(ToolGroupButton).GetField("_toolButtons",
-					BindingFlags.NonPublic | BindingFlags.Instance);
-			}
-			
 			private static void Postfix(ref bool __result, ToolGroupManager __instance, ToolManager ____toolManager)
 			{
-				var toolGroupName = Plugin.ExtendedInputService.SwitchToolGroup;
-				if(toolGroupName.HasValue)
+				var toolGroupName = isToolGroupKeybindingDown;
+				if(toolGroupName != null)
 				{
-					if(SwitchToolGroup(toolGroupName.Value, __instance, ____toolManager))
+					if(SwitchToolGroup(toolGroupName, __instance, ____toolManager))
 					{
 						__result = true;
 					}
 				}
 			}
 			
-			private static bool SwitchToolGroup(ToolGroupName toolGroupName, ToolGroupManager instance, ToolManager toolManager)
+			private static string isToolGroupKeybindingDown
 			{
-				var toolButtonService = (ToolButtonService) ToolButtonServiceField.GetValue(toolManager);
-				var toolGroupButtons = (List<ToolGroupButton>) ToolGroupButtonsField.GetValue(toolButtonService);
-				
-				foreach(ToolGroupButton groupBtn in toolGroupButtons)
+				get
 				{
-					var toolGroup = (ToolGroup) ToolGroupField.GetValue(groupBtn);
-					if(ToolGroupNameHelper.FromNameLockey(toolGroup.DisplayNameLocKey) == toolGroupName)
+					var inputService = DependencyExtractorSingletonGameplay.getInputService();
+					foreach(var (keybinding, tool) in KeybindingKeys.keybindingToTool)
+					{
+						if (inputService.IsKeyDown(keybinding))
+						{
+							return tool;
+						}
+					}
+					return null;
+				}
+			}
+			
+			private static bool SwitchToolGroup(string toolGroupName, ToolGroupManager instance, ToolManager toolManager)
+			{
+				foreach(ToolGroupButton toolGroupButton in toolManager._toolButtonService._toolGroupButtons)
+				{
+					var toolGroup = toolGroupButton._toolGroup;
+					if(toolGroup.DisplayNameLocKey.Equals(toolGroupName))
 					{
 						if(instance.ActiveToolGroup == toolGroup)
 						{
@@ -78,9 +73,9 @@ namespace ToolShortcuts.ToolSystem
 						else
 						{
 							instance.SwitchToolGroup(toolGroup);
-							if(KeyBindings.DirectlyOpenFirstToolInGroup)
+							if(Plugin.directlyOpenFirstToolInGroup)
 							{
-								var toolButtons = (List<ToolButton>) ToolButtonsField.GetValue(groupBtn);
+								var toolButtons = toolGroupButton._toolButtons;
 								toolManager.SwitchTool(toolButtons[0].Tool);
 							}
 						}
