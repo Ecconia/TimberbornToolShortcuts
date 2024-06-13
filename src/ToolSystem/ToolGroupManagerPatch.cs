@@ -47,7 +47,7 @@ namespace ToolShortcuts.ToolSystem
 			{
 				get
 				{
-					var inputService = DependencyExtractorSingletonGameplay.getInputService();
+					var inputService = DependencyExtractorSingleton.getInputService();
 					foreach(var (keybinding, tool) in KeybindingKeys.keybindingToTool)
 					{
 						if (inputService.IsKeyDown(keybinding))

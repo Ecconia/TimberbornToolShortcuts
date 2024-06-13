@@ -38,7 +38,7 @@ namespace ToolShortcuts.ToolSystem
 			{
 				get
 				{
-					var inputService = DependencyExtractorSingletonGameplay.getInputService();
+					var inputService = DependencyExtractorSingleton.getInputService();
 					int index = 0;
 					foreach(var toolIndexKeybinding in KeybindingKeys.ToolIndex.allToolIndices)
 					{

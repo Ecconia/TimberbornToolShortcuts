@@ -83,7 +83,7 @@ namespace ToolShortcuts.LabelStuff
 		
 		private static InputBinding getRelevantBinding(string keyBindingId)
 		{
-			var bindingSpecifications = DependencyExtractorSingletonGameplay.getKeyBindingRegistry().Get(keyBindingId);
+			var bindingSpecifications = DependencyExtractorSingleton.getKeyBindingRegistry().Get(keyBindingId);
 			var binding = bindingSpecifications.PrimaryInputBinding.IsDefined ? bindingSpecifications.PrimaryInputBinding : bindingSpecifications.SecondaryInputBinding;
 			return !binding.IsDefined ? null : binding; //Null is, when neither keybinding is set.
 		}
@@ -125,7 +125,7 @@ namespace ToolShortcuts.LabelStuff
 		
 		private static string constructKeybindingShortText(InputBinding binding)
 		{
-			var text = DependencyExtractorSingletonGameplay.getInputBindingNameService().GetName(binding);
+			var text = DependencyExtractorSingleton.getInputBindingNameService().GetName(binding);
 			if (binding.InputModifiers != InputModifiers.None)
 			{
 				text += '+';
@@ -135,7 +135,7 @@ namespace ToolShortcuts.LabelStuff
 		
 		private static string constructKeybindingLongText(InputBinding binding)
 		{
-			return DependencyExtractorSingletonGameplay.getInputBindingDescriber().GetInputBindingText(binding);
+			return DependencyExtractorSingleton.getInputBindingDescriber().GetInputBindingText(binding);
 		}
 	}
 }
