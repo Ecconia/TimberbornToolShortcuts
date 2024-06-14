@@ -7,7 +7,7 @@ Default config (no collision with vanilla keybindings):
 - `Shift + F`: Open Field Planting tools
 - `Shift + T`: Open Forestry Planting tools
 - `X`: Open Demolishing tools
-- `Shift + 1, Shift + 2, ..., Shift + 9, Shift + 10`: Select tool
+- `Shift + 1, Shift + 2, ..., Shift + 9, Shift + 0`: Select tool
 
 ![Demo](https://github.com/zallek/TimberbornToolShortcuts/raw/main/demo.gif)
 
