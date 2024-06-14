@@ -53,7 +53,7 @@ namespace ToolShortcuts.LabelStuff
 				{
 					continue; //Some tools are dev mode, these are ignored.
 				}
-				if (toolShortcutIndex >= toolButtons.Count)
+				if (toolShortcutIndex >= indexToolShortcuts.Count)
 				{
 					break; //We ran out of tool index shortcut keybindings.
 				}
