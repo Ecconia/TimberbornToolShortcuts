@@ -8,7 +8,7 @@ using ToolShortcuts.Util;
 
 namespace ToolShortcuts
 {
-	[BepInPlugin("Mod.ToolShortcuts", "Tool Shortcuts", "2.0.2")]
+	[BepInPlugin("Mod.ToolShortcuts", "Tool Shortcuts", "2.0.3")]
 	public class Plugin : BaseUnityPlugin
 	{
 		public static bool directlyOpenFirstToolInGroup = true; //Default value, updated via settings UI.

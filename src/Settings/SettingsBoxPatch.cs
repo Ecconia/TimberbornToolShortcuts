@@ -10,7 +10,7 @@ namespace ToolShortcuts.Settings
 		[HarmonyPatch(typeof(SettingsBox), nameof(SettingsBox.GetPanel))]
 		public static class PatchToolGroupButtonToolLabelsEntered
 		{
-			private static void Postfix(ref VisualElement __result)
+			private static void Postfix(ref VisualElement __result, SettingsBox __instance)
 			{
 				var settingsParent = extractSettingsRoot(__result);
 				
@@ -18,11 +18,12 @@ namespace ToolShortcuts.Settings
 				var toggle = addToggle(settingsParent, "Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", "Use first tool of tool group, when opening it with keybindings?");
 				
 				//Make this settings access pretty and generic one day... Should be in a singleton.
-				var value = DependencyExtractorSingleton.getSettings().GetBool("Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", Plugin.directlyOpenFirstToolInGroup);
+				var settings = __instance._gameSavingSettingsController._gameSavingSetting._settings;
+				var value = settings.GetBool("Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", Plugin.directlyOpenFirstToolInGroup);
 				Plugin.directlyOpenFirstToolInGroup = value;
 				toggle.SetValueWithoutNotify(value);
 				toggle.RegisterValueChangedCallback(v => {
-					DependencyExtractorSingleton.getSettings().SetBool("Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", v.newValue);
+					settings.SetBool("Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", v.newValue);
 					Plugin.directlyOpenFirstToolInGroup = v.newValue;
 				});
 			}

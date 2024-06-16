@@ -33,7 +33,7 @@ namespace ToolShortcuts.ToolSystem
 		{
 			private static void Postfix(ref bool __result, ToolGroupManager __instance, ToolManager ____toolManager)
 			{
-				var toolGroupName = isToolGroupKeybindingDown;
+				var toolGroupName = isToolGroupKeybindingDown(__instance._inputService);
 				if(toolGroupName != null)
 				{
 					if(SwitchToolGroup(toolGroupName, __instance, ____toolManager))
@@ -43,20 +43,16 @@ namespace ToolShortcuts.ToolSystem
 				}
 			}
 			
-			private static string isToolGroupKeybindingDown
+			private static string isToolGroupKeybindingDown(InputService inputService)
 			{
-				get
+				foreach(var (keybinding, tool) in KeybindingKeys.keybindingToTool)
 				{
-					var inputService = DependencyExtractorSingleton.getInputService();
-					foreach(var (keybinding, tool) in KeybindingKeys.keybindingToTool)
+					if (inputService.IsKeyDown(keybinding))
 					{
-						if (inputService.IsKeyDown(keybinding))
-						{
-							return tool;
-						}
+						return tool;
 					}
-					return null;
 				}
+				return null;
 			}
 			
 			private static bool SwitchToolGroup(string toolGroupName, ToolGroupManager instance, ToolManager toolManager)

@@ -30,13 +30,13 @@
     <Reference Include="Timberborn.GameScene" Publicize="true">
       <HintPath>Timberborn\Timberborn.GameScene.dll</HintPath>
     </Reference>
-    <Reference Include="Timberborn.InputSystem">
+    <Reference Include="Timberborn.InputSystem" Publicize="true">
       <HintPath>Timberborn/Timberborn.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Timberborn.KeyBindingSystem" Publicize="true">
       <HintPath>Timberborn\Timberborn.KeyBindingSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Timberborn.KeyBindingSystemUI">
+    <Reference Include="Timberborn.KeyBindingSystemUI" Publicize="true">
       <HintPath>Timberborn\Timberborn.KeyBindingSystemUI.dll</HintPath>
     </Reference>
     <Reference Include="Timberborn.MainMenuScene" Publicize="true">

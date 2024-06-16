@@ -34,16 +34,22 @@ namespace ToolShortcuts.LabelStuff
 				}
 			}
 			
-			var binding = getRelevantBinding(keyBindingId);
-			if (binding != null)
+			var binding = getRelevantBinding(toolGroupButton._toolGroupManager._inputService._keyBindingRegistry,keyBindingId);
+			if (binding == null)
 			{
-				toolGroupButton.Root.Add(new KeyBindingLabel(constructKeybindingShortText(binding), false));
-				addTooltipKeybinding(toolGroupButton.Root, binding);
+				return;
 			}
+			var text = constructKeybindingShortText(binding);
+			if (text == null)
+			{
+				return;
+			}
+			toolGroupButton.Root.Add(new KeyBindingLabel(text, false));
+			addTooltipKeybinding(toolGroupButton.Root, binding);
 		}
 		
 		//Called by patch (on enter group)
-		public static void addCustomToolIndexKeybindingLabel(IReadOnlyList<ToolButton> toolButtons)
+		public static void addCustomToolIndexKeybindingLabel(KeyBindingRegistry registry, IReadOnlyList<ToolButton> toolButtons)
 		{
 			var indexToolShortcuts = KeybindingKeys.ToolIndex.allToolIndices;
 			int toolShortcutIndex = 0;
@@ -58,7 +64,7 @@ namespace ToolShortcuts.LabelStuff
 					break; //We ran out of tool index shortcut keybindings.
 				}
 				
-				var binding = getRelevantBinding(indexToolShortcuts[toolShortcutIndex++]);
+				var binding = getRelevantBinding(registry, indexToolShortcuts[toolShortcutIndex++]);
 				if (binding == null)
 				{
 					continue; //No keybinding defined - do not add label.
@@ -81,9 +87,9 @@ namespace ToolShortcuts.LabelStuff
 			}
 		}
 		
-		private static InputBinding getRelevantBinding(string keyBindingId)
+		private static InputBinding getRelevantBinding(KeyBindingRegistry registry, string keyBindingId)
 		{
-			var bindingSpecifications = DependencyExtractorSingleton.getKeyBindingRegistry().Get(keyBindingId);
+			var bindingSpecifications = registry.Get(keyBindingId);
 			var binding = bindingSpecifications.PrimaryInputBinding.IsDefined ? bindingSpecifications.PrimaryInputBinding : bindingSpecifications.SecondaryInputBinding;
 			return !binding.IsDefined ? null : binding; //Null is, when neither keybinding is set.
 		}
@@ -120,12 +126,23 @@ namespace ToolShortcuts.LabelStuff
 				return;
 			}
 			
-			tooltip.text = $"{text} ({constructKeybindingLongText(binding)})";
+			var keyText = constructKeybindingLongText(binding);
+			if (keyText == null)
+			{
+				return;
+			}
+			tooltip.text = $"{text} ({keyText})";
 		}
 		
 		private static string constructKeybindingShortText(InputBinding binding)
 		{
-			var text = DependencyExtractorSingleton.getInputBindingNameService().GetName(binding);
+			var inputBindingNameService = DependencyExtractorSingleton.inputBindingNameService;
+			if (inputBindingNameService == null)
+			{
+				Plugin.Log.LogWarning("InputBindingNameService was not yet set (dependency grabber not loaded yet). Cannot create keybinding labels. Nag mod developer for backup solution.");
+				return null;
+			}
+			var text = inputBindingNameService.GetName(binding);
 			if (binding.InputModifiers != InputModifiers.None)
 			{
 				text += '+';
@@ -135,7 +152,13 @@ namespace ToolShortcuts.LabelStuff
 		
 		private static string constructKeybindingLongText(InputBinding binding)
 		{
-			return DependencyExtractorSingleton.getInputBindingDescriber().GetInputBindingText(binding);
+			var inputBindingDescriber = DependencyExtractorSingleton.inputBindingDescriber;
+			if (inputBindingDescriber == null)
+			{
+				Plugin.Log.LogWarning("InputBindingDescriber was not yet set (dependency grabber not loaded yet). Cannot create keybinding labels. Nag mod developer for backup solution.");
+				return null;
+			}
+			return inputBindingDescriber.GetInputBindingText(binding);
 		}
 	}
 }

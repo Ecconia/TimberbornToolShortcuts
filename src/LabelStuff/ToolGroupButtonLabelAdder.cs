@@ -16,7 +16,7 @@ namespace ToolShortcuts.LabelStuff
 					return; //Event is received on all buttons, filter to the current one.
 				}
 				
-				ToolButtonLabelHelper.addCustomToolIndexKeybindingLabel(____toolButtons);
+				ToolButtonLabelHelper.addCustomToolIndexKeybindingLabel(__instance._toolGroupManager._inputService._keyBindingRegistry, ____toolButtons);
 			}
 		}
 		
