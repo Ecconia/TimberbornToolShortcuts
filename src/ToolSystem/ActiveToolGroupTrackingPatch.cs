@@ -8,7 +8,7 @@ namespace ToolShortcuts.ToolSystem
 	{
 		public static List<ToolButton> activeToolGroupButtons;
 		
-		[HarmonyPatch(typeof(ToolGroupButton), "OnToolGroupEntered")]
+		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupEntered))]
 		public static class PatchOnToolGroupEntered
 		{
 			private static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
@@ -21,7 +21,7 @@ namespace ToolShortcuts.ToolSystem
 			}
 		}
 		
-		[HarmonyPatch(typeof(ToolGroupButton), "OnToolGroupExited")]
+		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupExited))]
 		public static class PatchOnToolGroupExited
 		{
 			private static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroup ____toolGroup)

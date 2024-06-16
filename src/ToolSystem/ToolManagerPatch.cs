@@ -7,7 +7,7 @@ namespace ToolShortcuts.ToolSystem
 {
 	public static class ToolManagerPatch
 	{
-		[HarmonyPatch(typeof(ToolManager), "ProcessInput")]
+		[HarmonyPatch(typeof(ToolManager), nameof(ToolManager.ProcessInput))]
 		public static class PatchProcessInput
 		{
 			private static void Postfix(ref bool? __result, ToolManager __instance)
