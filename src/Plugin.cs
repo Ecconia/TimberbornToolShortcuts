@@ -1,6 +1,5 @@
 using System.Reflection;
 using BepInEx;
-using BepInEx.Logging;
 using HarmonyLib;
 using ToolShortcuts.Keybindings;
 using ToolShortcuts.LabelStuff;
@@ -12,12 +11,9 @@ namespace ToolShortcuts
 	public class Plugin : BaseUnityPlugin
 	{
 		public static bool directlyOpenFirstToolInGroup = true; //Default value, updated via settings UI.
-		public static ManualLogSource Log;
 		
 		private void Awake()
 		{
-			Log = Logger;
-			
 			Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
 			var harmony = new Harmony("Mod.ToolShortcuts");
 			
@@ -28,6 +24,16 @@ namespace ToolShortcuts
 			ServiceLoader.loadInGame<KeybindingRebindLabelUpdater>();
 			
 			ServiceLoader.apply(harmony);
+		}
+		
+		public static void log(string text)
+		{
+			Console.WriteLine($"[ToolShortcuts / INFO] {text}");
+		}
+		
+		public static void logWarning(string text)
+		{
+			Console.WriteLine($"[ToolShortcuts / WARNING] {text}");
 		}
 	}
 }

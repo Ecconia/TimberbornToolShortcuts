@@ -21,13 +21,13 @@ namespace ToolShortcuts.Keybindings
 				loaded_layouts.Add(loaded);
 			}
 			
-			Plugin.Log.LogInfo($"Flag layouts:");
+			Plugin.log($"Flag layouts:");
 			foreach(var layout in loaded_layouts)
 			{
-				Plugin.Log.LogInfo($"- {layout.name} Generic: {layout.isGenericTypeOfDevice} Hidden: {layout.hideInUI} Override: {layout.isOverride} Background: {layout.canRunInBackground} Noisy: {layout.isNoisy}");
+				Plugin.log($"- {layout.name} Generic: {layout.isGenericTypeOfDevice} Hidden: {layout.hideInUI} Override: {layout.isOverride} Background: {layout.canRunInBackground} Noisy: {layout.isNoisy}");
 			}
 			
-			Plugin.Log.LogInfo($"Listing input-controls:");
+			Plugin.log($"Listing input-controls:");
 			var layouts = loaded_layouts.Where(l => l.isGenericTypeOfDevice);
 			foreach (var layout in layouts)
 			{
@@ -40,7 +40,7 @@ namespace ToolShortcuts.Keybindings
 				foreach (var control in device.allControls)
 				{
 					var relativePath = control.path.Substring(device.path.Length);
-					Plugin.Log.LogInfo($"- <{layout.name}>{relativePath}");
+					Plugin.log($"- <{layout.name}>{relativePath}");
 				}
 				InputSystem.RemoveDevice(device);
 			}

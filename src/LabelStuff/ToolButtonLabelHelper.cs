@@ -139,7 +139,7 @@ namespace ToolShortcuts.LabelStuff
 			var inputBindingNameService = DependencyExtractorSingleton.inputBindingNameService;
 			if (inputBindingNameService == null)
 			{
-				Plugin.Log.LogWarning("InputBindingNameService was not yet set (dependency grabber not loaded yet). Cannot create keybinding labels. Nag mod developer for backup solution.");
+				Plugin.logWarning("InputBindingNameService was not yet set (dependency grabber not loaded yet). Cannot create keybinding labels. Nag mod developer for backup solution.");
 				return null;
 			}
 			var text = inputBindingNameService.GetName(binding);
@@ -155,7 +155,7 @@ namespace ToolShortcuts.LabelStuff
 			var inputBindingDescriber = DependencyExtractorSingleton.inputBindingDescriber;
 			if (inputBindingDescriber == null)
 			{
-				Plugin.Log.LogWarning("InputBindingDescriber was not yet set (dependency grabber not loaded yet). Cannot create keybinding labels. Nag mod developer for backup solution.");
+				Plugin.logWarning("InputBindingDescriber was not yet set (dependency grabber not loaded yet). Cannot create keybinding labels. Nag mod developer for backup solution.");
 				return null;
 			}
 			return inputBindingDescriber.GetInputBindingText(binding);
