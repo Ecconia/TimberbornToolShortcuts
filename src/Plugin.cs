@@ -1,29 +1,41 @@
+using System;
 using System.Reflection;
-using BepInEx;
+using Bindito.Core;
 using HarmonyLib;
-using ToolShortcuts.Keybindings;
+using Timberborn.ModManagerScene;
 using ToolShortcuts.LabelStuff;
-using ToolShortcuts.Util;
 
 namespace ToolShortcuts
 {
-	[BepInPlugin("Mod.ToolShortcuts", "Tool Shortcuts", "2.0.3")]
-	public class Plugin : BaseUnityPlugin
+	public class Plugin : IModStarter
 	{
 		public static bool directlyOpenFirstToolInGroup = true; //Default value, updated via settings UI.
 		
-		private void Awake()
+		public void StartMod()
 		{
 			Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
-			var harmony = new Harmony("Mod.ToolShortcuts");
-			
-			//A hacky service, to expose singletons. Must be loaded in all scenes, to ensure the up-to-date dependency reference.
-			ServiceLoader.loadEverywhere<DependencyExtractorSingleton>();
-			//Adds keybindings for tools:
-			ServiceLoader.loadEverywhere<ToolShortcutKeybindingInjector>();
-			ServiceLoader.loadInGame<KeybindingRebindLabelUpdater>();
-			
-			ServiceLoader.apply(harmony);
+		}
+		
+		[Context("Game")]
+		public class KeybindingRebindLabelConfigurator : IConfigurator
+		{
+			public void Configure(IContainerDefinition containerDefinition)
+			{
+				//Adds keybindings for tools:
+				containerDefinition.Bind<KeybindingRebindLabelUpdater>().AsSingleton();
+			}
+		}
+		
+		[Context("Game")]
+		[Context("MainMenu")]
+		[Context("MapEditor")]
+		public class DependencyExtractorConfigurator : IConfigurator
+		{
+			public void Configure(IContainerDefinition containerDefinition)
+			{
+				//A hacky service, to expose singletons. Must be loaded in all scenes, to ensure the up-to-date dependency reference.
+				containerDefinition.Bind<DependencyExtractorSingleton>().AsSingleton();
+			}
 		}
 		
 		public static void log(string text)

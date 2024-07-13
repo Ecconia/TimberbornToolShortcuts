@@ -45,6 +45,9 @@
     <Reference Include="Timberborn.MapEditorScene" Publicize="true">
       <HintPath>Timberborn\Timberborn.MapEditorScene.dll</HintPath>
     </Reference>
+    <Reference Include="Timberborn.ModManagerScene">
+      <HintPath>Timberborn\Timberborn.ModManagerScene.dll</HintPath>
+    </Reference>
     <Reference Include="Timberborn.SettingsSystem">
       <HintPath>Timberborn\Timberborn.SettingsSystem.dll</HintPath>
     </Reference>
