@@ -7,19 +7,19 @@ namespace ToolShortcuts.ToolSystem
 {
 	public static class ToolGroupManagerPatch
 	{
-		[HarmonyPatch(typeof(ToolGroupManager), "Load")]
+		[HarmonyPatch(typeof(ToolGroupManager), nameof(ToolGroupManager.Load))]
 		public static class PatchLoad
 		{
-			private static void Postfix(ToolGroupManager __instance, InputService ____inputService)
+			public static void Postfix(ToolGroupManager __instance, InputService ____inputService)
 			{
 				____inputService.AddInputProcessor(__instance);
 			}
 		}
 		
-		[HarmonyPatch(typeof(ToolGroupManager), "SwitchToolGroup")]
+		[HarmonyPatch(typeof(ToolGroupManager), nameof(ToolGroupManager.SwitchToolGroup))]
 		public static class PatchSwitchToolGroup
 		{
-			private static void Postfix(ToolGroup toolGroup, ToolGroupManager __instance, InputService ____inputService)
+			public static void Postfix(ToolGroup toolGroup, ToolGroupManager __instance, InputService ____inputService)
 			{
 				if(toolGroup == null)
 				{
@@ -31,7 +31,7 @@ namespace ToolShortcuts.ToolSystem
 		[HarmonyPatch(typeof(ToolGroupManager), nameof(ToolGroupManager.ProcessInput))]
 		public static class PatchProcessInput
 		{
-			private static void Postfix(ref bool __result, ToolGroupManager __instance, ToolManager ____toolManager)
+			public static void Postfix(ref bool __result, ToolGroupManager __instance, ToolManager ____toolManager)
 			{
 				var toolGroupName = isToolGroupKeybindingDown(__instance._inputService);
 				if(toolGroupName != null)

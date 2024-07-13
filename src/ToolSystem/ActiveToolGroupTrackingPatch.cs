@@ -11,7 +11,7 @@ namespace ToolShortcuts.ToolSystem
 		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupEntered))]
 		public static class PatchOnToolGroupEntered
 		{
-			private static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
+			public static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroup ____toolGroup, List<ToolButton> ____toolButtons)
 			{
 				if (toolGroupEnteredEvent.ToolGroup != ____toolGroup)
 				{
@@ -24,7 +24,7 @@ namespace ToolShortcuts.ToolSystem
 		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupExited))]
 		public static class PatchOnToolGroupExited
 		{
-			private static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroup ____toolGroup)
+			public static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroup ____toolGroup)
 			{
 				//TimberAPI has the habit of replacing references, means one has to default to comparing strings.
 				if (!____toolGroup.DisplayNameLocKey.Equals(toolGroupExitedEvent.ToolGroup?.DisplayNameLocKey))

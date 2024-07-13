@@ -9,7 +9,7 @@ namespace ToolShortcuts.LabelStuff
 		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupEntered))]
 		public static class PatchToolGroupButtonToolLabelsEntered
 		{
-			private static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroupButton __instance, IReadOnlyList<ToolButton> ____toolButtons)
+			public static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroupButton __instance, IReadOnlyList<ToolButton> ____toolButtons)
 			{
 				if (toolGroupEnteredEvent.ToolGroup != __instance._toolGroup)
 				{
@@ -23,7 +23,7 @@ namespace ToolShortcuts.LabelStuff
 		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupExited))]
 		public static class PatchToolGroupButtonToolLabelsExited
 		{
-			private static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroupButton __instance, IReadOnlyList<ToolButton> ____toolButtons)
+			public static void Postfix(ToolGroupExitedEvent toolGroupExitedEvent, ToolGroupButton __instance, IReadOnlyList<ToolButton> ____toolButtons)
 			{
 				if (toolGroupExitedEvent.ToolGroup != __instance._toolGroup)
 				{
@@ -40,7 +40,7 @@ namespace ToolShortcuts.LabelStuff
 		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.PostLoad))]
 		public static class PatchPostLoad
 		{
-			private static void Postfix(ToolGroupButton __instance)
+			public static void Postfix(ToolGroupButton __instance)
 			{
 				ToolButtonLabelHelper.addCustomToolGroupKeybindingLabel(__instance);
 			}

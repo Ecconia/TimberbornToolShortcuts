@@ -10,7 +10,7 @@ namespace ToolShortcuts.Settings
 		[HarmonyPatch(typeof(SettingsBox), nameof(SettingsBox.GetPanel))]
 		public static class PatchToolGroupButtonToolLabelsEntered
 		{
-			private static void Postfix(ref VisualElement __result, SettingsBox __instance)
+			public static void Postfix(ref VisualElement __result, SettingsBox __instance)
 			{
 				var settingsParent = extractSettingsRoot(__result);
 				

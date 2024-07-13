@@ -11,7 +11,7 @@ namespace ToolShortcuts.ToolSystem
 		[HarmonyPatch(typeof(ToolManager), nameof(ToolManager.ProcessInput))]
 		public static class PatchProcessInput
 		{
-			private static void Postfix(ref bool? __result, ToolManager __instance)
+			public static void Postfix(ref bool? __result, ToolManager __instance)
 			{
 				var toolIndex = IsToolIndexKeybindingDown(__instance._inputService);
 				if(toolIndex != null)
