@@ -13,7 +13,7 @@ namespace ToolShortcuts
 		
 		public void StartMod()
 		{
-			Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
+			new Harmony("Mod:ToolShortcuts").PatchAll();
 		}
 		
 		[Context("Game")]

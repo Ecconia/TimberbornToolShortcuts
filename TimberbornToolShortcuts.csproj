@@ -11,10 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Might be useful? Hopefully this finds issues. -->
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
-    <PackageReference Include="BepInEx.Core" Version="5.4.19.0" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
+    <!-- Allows to access private/internal things in certain game DLLs -->
     <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
+    <!-- Reference for the latest Harmony version. Provided by the Harmony mod. -->
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
   </ItemGroup>
 
   <ItemGroup>
