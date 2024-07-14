@@ -1,6 +1,6 @@
 {
   "Name": "Tool Shortcuts",
-  "Version": "2.1.1",
+  "Version": "2.1.2",
   "Id": "ToolShortcuts",
   "MinimumGameVersion": "0.6.0.0",
   "Description": "ToolShortcuts allows to set keybindings for tool groups and index-based keybindings for tools, to make quick tool access possible.",

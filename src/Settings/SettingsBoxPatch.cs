@@ -7,25 +7,31 @@ namespace ToolShortcuts.Settings
 {
 	public static class SettingsBoxPatch
 	{
-		[HarmonyPatch(typeof(SettingsBox), nameof(SettingsBox.GetPanel))]
-		public static class PatchToolGroupButtonToolLabelsEntered
+		private const string SettingsKey = "Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool";
+		
+		private static Toggle lastToggle;
+		
+		[HarmonyPatch(typeof(SettingsBox), nameof(SettingsBox.Load))]
+		public static class PatchSettingsBoxLoad
 		{
-			public static void Postfix(ref VisualElement __result, SettingsBox __instance)
+			public static void Postfix(SettingsBox __instance, VisualElement ____root)
 			{
-				var settingsParent = extractSettingsRoot(__result);
+				var settingsParent = extractSettingsRoot(____root);
 				
 				addHeader(settingsParent, "Mod.ToolShortcuts.Header", "Tool Shortcuts");
-				var toggle = addToggle(settingsParent, "Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", "Use first tool of tool group, when opening it with keybindings?");
+				var toggle = addToggle(settingsParent, SettingsKey, "Use first tool of tool group, when opening it with keybindings?");
 				
 				//Make this settings access pretty and generic one day... Should be in a singleton.
 				var settings = __instance._gameSavingSettingsController._gameSavingSetting._settings;
-				var value = settings.GetBool("Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", Plugin.directlyOpenFirstToolInGroup);
+				var value = settings.GetBool(SettingsKey, Plugin.directlyOpenFirstToolInGroup);
 				Plugin.directlyOpenFirstToolInGroup = value;
 				toggle.SetValueWithoutNotify(value);
 				toggle.RegisterValueChangedCallback(v => {
-					settings.SetBool("Mod.ToolShortcuts.Setting.ShouldDirectlyUseFirstTool", v.newValue);
+					settings.SetBool(SettingsKey, v.newValue);
 					Plugin.directlyOpenFirstToolInGroup = v.newValue;
 				});
+				
+				lastToggle = toggle;
 			}
 			
 			private static VisualElement extractSettingsRoot(VisualElement settingsBox)
@@ -57,6 +63,20 @@ namespace ToolShortcuts.Settings
 				toggle[0].Add(new Label(description));
 				parent.Add(toggle);
 				return toggle;
+			}
+		}
+		
+		[HarmonyPatch(typeof(SettingsBox), nameof(SettingsBox.GetPanel))]
+		public static class PatchSettingsBoxGetPanel
+		{
+			public static void Postfix(SettingsBox __instance)
+			{
+				if (lastToggle != null)
+				{
+					var settings = __instance._gameSavingSettingsController._gameSavingSetting._settings;
+					var value = settings.GetBool(SettingsKey, Plugin.directlyOpenFirstToolInGroup);
+					lastToggle.SetValueWithoutNotify(value);
+				}
 			}
 		}
 	}
