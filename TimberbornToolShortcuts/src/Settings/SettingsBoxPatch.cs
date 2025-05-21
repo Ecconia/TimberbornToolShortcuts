@@ -1,6 +1,8 @@
 using System;
 using HarmonyLib;
+using Timberborn.CoreUI;
 using Timberborn.SettingsSystemUI;
+using ToolShortcuts.Keybindings;
 using UnityEngine.UIElements;
 
 namespace ToolShortcuts.Settings
@@ -14,12 +16,14 @@ namespace ToolShortcuts.Settings
 		[HarmonyPatch(typeof(SettingsBox), nameof(SettingsBox.Load))]
 		public static class PatchSettingsBoxLoad
 		{
-			public static void Postfix(SettingsBox __instance, VisualElement ____root)
+			public static void Postfix(SettingsBox __instance, VisualElement ____root, VisualElementLoader ____visualElementLoader)
 			{
 				var settingsParent = extractSettingsRoot(____root);
 				
-				addHeader(settingsParent, "Mod.ToolShortcuts.Header", "Tool Shortcuts");
-				var toggle = addToggle(settingsParent, SettingsKey, "Use first tool of tool group, when opening it with keybindings?");
+				var header = addHeader(settingsParent, "Mod.ToolShortcuts.Header", KeybindingKeys.LocalizationUIPrefix + "tool_shortcuts_settings_title");
+				____visualElementLoader._visualElementInitializer.InitializeVisualElement(header);
+				var toggle = addToggle(settingsParent, SettingsKey, KeybindingKeys.LocalizationUIPrefix + "should_directly_use_first_tool_description");
+				____visualElementLoader._visualElementInitializer.InitializeVisualElement(toggle);
 				
 				//Make this settings access pretty and generic one day... Should be in a singleton.
 				var settings = __instance._gameSavingSettingsController._gameSavingSetting._settings;
@@ -44,15 +48,19 @@ namespace ToolShortcuts.Settings
 				return savingsHeader.parent;
 			}
 			
-			private static void addHeader(VisualElement parent, string name, string title)
+			private static VisualElement addHeader(VisualElement parent, string name, string titleLocalizationKey)
 			{
-				var header = new Label(title);
+				var header = new LocalizableLabel
+				{
+					_textLocKey = titleLocalizationKey,
+				};
 				header.name = name;
 				header.AddToClassList("settings-header");
 				parent.Add(header);
+				return header;
 			}
 			
-			private static Toggle addToggle(VisualElement parent, string name, string description)
+			private static Toggle addToggle(VisualElement parent, string name, string descriptionLocalizationKey)
 			{
 				var toggle = new Toggle();
 				toggle.name = name;
@@ -60,7 +68,10 @@ namespace ToolShortcuts.Settings
 				toggle.AddToClassList("settings-toggle");
 				toggle.AddToClassList("settings-text");
 				toggle.AddToClassList("bottom-padding--medium");
-				toggle[0].Add(new Label(description));
+				toggle[0].Add(new LocalizableLabel
+				{
+					_textLocKey = descriptionLocalizationKey,
+				});
 				parent.Add(toggle);
 				return toggle;
 			}

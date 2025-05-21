@@ -1,8 +1,8 @@
 {
   "Name": "Tool Shortcuts",
-  "Version": "2.1.2",
+  "Version": "2.1.3",
   "Id": "ToolShortcuts",
-  "MinimumGameVersion": "0.6.0.0",
+  "MinimumGameVersion": "0.7.8.9",
   "Description": "ToolShortcuts allows to set keybindings for tool groups and index-based keybindings for tools, to make quick tool access possible.",
   "RequiredMods": [
     {

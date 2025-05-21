@@ -1,8 +1,12 @@
 # IDE:
 /.idea/
 /.vscode/
-# Project:
-/Timberborn/
+
 # CSharp:
 bin/
 obj/
+
+# Project:
+/Timberborn/
+/res/Blueprints/
+/res/Localizations/enUS_keybindings.csv

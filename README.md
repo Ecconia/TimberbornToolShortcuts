@@ -13,13 +13,24 @@ Default config (no collision with vanilla keybindings):
 
 ## Requirements
 
-- [BepInExPack for Timberborn](https://mod.io/g/timberborn/m/bepinexpack/)
+- [Harmony](https://mod.io/g/timberborn/m/harmony)
 
 ## Installation
 
-- Decompress the zip archive in your plugins folder `BepInEx\plugins\`.
+- Decompress the zip archive in Timberborns mod folder `C:/users/<user>/Documents/Timberborn/Mods/`.
 
 ## Configuration
 
 - You can assign/change keybindings easily via the vanilla keybindings settings.
 - In the main settings, you can choose if the first tool should automatically be selected when opening a tool group by keybinding.
+
+## Building
+
+To build the mod, you have to export an environment variable to the game installation directory before building.
+
+On Linux that looks something like this:
+```bash
+export Timberborn="/home/ecconia/.local/share/Steam/steamapps/common/Timberborn/"
+dotnet run --project ResourceGenerator
+dotnet build -c Release
+```

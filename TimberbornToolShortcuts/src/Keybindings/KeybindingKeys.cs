@@ -7,6 +7,9 @@ namespace ToolShortcuts.Keybindings
 		private const string ModPrefix = "mod.tool_shortcuts.";
 		public const string GroupPrefix = ModPrefix + "keybindings_group.";
 		private const string ToolPrefix = ModPrefix + "keybindings_tool.";
+		private const string LocalizationPrefix = ModPrefix + "localization.";
+		public const string LocalizationKeybindingsPrefix = LocalizationPrefix + "keybindings.";
+		public const string LocalizationUIPrefix = LocalizationPrefix + "ui.";
 		
 		public static class ActionTools
 		{

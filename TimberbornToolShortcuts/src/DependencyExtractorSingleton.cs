@@ -1,4 +1,3 @@
-using System;
 using Timberborn.KeyBindingSystem;
 using Timberborn.KeyBindingSystemUI;
 

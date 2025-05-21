@@ -1,0 +1,3 @@
+ID,Text,Comment
+mod.tool_shortcuts.localization.ui.tool_shortcuts_settings_title,"Tool Shortcuts",
+mod.tool_shortcuts.localization.ui.should_directly_use_first_tool_description,"Use first tool of tool group, when opening it with keybindings?",

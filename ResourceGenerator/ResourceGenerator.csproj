@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<PropertyGroup>
+		<OutputType>exe</OutputType>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>true</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Reference Include="Timberborn.KeyBindingSystem">
+			<HintPath>$(Timberborn)\Timberborn_Data\Managed\Timberborn.KeyBindingSystem.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	
+</Project>

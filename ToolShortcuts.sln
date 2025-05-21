@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimberbornToolShortcuts", "TimberbornToolShortcuts\TimberbornToolShortcuts.csproj", "{F364B94B-ED73-4819-A2D4-79FA59E3626A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceGenerator", "ResourceGenerator\ResourceGenerator.csproj", "{DD023090-A4DD-4609-A8C9-01F1C087FE88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +19,9 @@ Global
 		{F364B94B-ED73-4819-A2D4-79FA59E3626A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F364B94B-ED73-4819-A2D4-79FA59E3626A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F364B94B-ED73-4819-A2D4-79FA59E3626A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD023090-A4DD-4609-A8C9-01F1C087FE88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD023090-A4DD-4609-A8C9-01F1C087FE88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD023090-A4DD-4609-A8C9-01F1C087FE88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD023090-A4DD-4609-A8C9-01F1C087FE88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
