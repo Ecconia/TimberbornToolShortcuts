@@ -35,6 +35,7 @@ namespace ToolShortcuts.Keybindings
 			public const string Metal = Prefix + "metal";
 			public const string Power = Prefix + "power";
 			public const string Science = Prefix + "science";
+			public const string Automation = Prefix + "automation";
 			public const string Wellbeing = Prefix + "wellbeing";
 			public const string Decoration = Prefix + "decoration";
 			public const string Monuments = Prefix + "monuments";
@@ -59,6 +60,15 @@ namespace ToolShortcuts.Keybindings
 			public const string Index14 = Prefix + "i14";
 			public const string Index15 = Prefix + "i15";
 			public const string Index16 = Prefix + "i16";
+			public const string Index17 = Prefix + "i17";
+			public const string Index18 = Prefix + "i18";
+			public const string Index19 = Prefix + "i19";
+			public const string Index20 = Prefix + "i20";
+			public const string Index21 = Prefix + "i21";
+			public const string Index22 = Prefix + "i22";
+			public const string Index23 = Prefix + "i23";
+			public const string Index24 = Prefix + "i24";
+			
 			
 			public static readonly List<string> allToolIndices = new List<string>
 			{
@@ -66,6 +76,8 @@ namespace ToolShortcuts.Keybindings
 				Index5, Index6, Index7, Index8,
 				Index9, Index10, Index11, Index12,
 				Index13, Index14, Index15, Index16,
+				Index17, Index18, Index19, Index20,
+				Index21, Index22, Index23, Index24,
 			};
 		}
 		
@@ -92,6 +104,7 @@ namespace ToolShortcuts.Keybindings
 				(BuildingTools.Metal, "ToolGroups.Metal"),
 				(BuildingTools.Power, "ToolGroups.Power"),
 				(BuildingTools.Science, "ToolGroups.Science"),
+				(BuildingTools.Automation, "Automation.Automation"),
 				(BuildingTools.Wellbeing, "Wellbeing.DisplayName"),
 				(BuildingTools.Decoration, "ToolGroups.Decoration"),
 				(BuildingTools.Monuments, "ToolGroups.Monuments"),

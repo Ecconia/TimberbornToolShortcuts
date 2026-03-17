@@ -1,6 +1,6 @@
 using Timberborn.KeyBindingSystem;
 using Timberborn.SingletonSystem;
-using Timberborn.ToolSystem;
+using Timberborn.ToolButtonSystem;
 using ToolShortcuts.Keybindings;
 
 namespace ToolShortcuts.LabelStuff

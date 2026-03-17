@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Timberborn.KeyBindingSystem;
-using Timberborn.ToolSystem;
+using Timberborn.ToolButtonSystem;
 using ToolShortcuts.Keybindings;
 using UnityEngine.UIElements;
 
@@ -34,7 +34,7 @@ namespace ToolShortcuts.LabelStuff
 				}
 			}
 			
-			var binding = getRelevantBinding(toolGroupButton._toolGroupManager._inputService._keyBindingRegistry,keyBindingId);
+			var binding = getRelevantBinding(toolGroupButton._toolGroupService._inputService._keyBindingRegistry, keyBindingId);
 			if (binding == null)
 			{
 				return;

@@ -10,7 +10,7 @@ namespace ToolShortcuts
 	{
 		public static bool directlyOpenFirstToolInGroup = true; //Default value, updated via settings UI.
 		
-		public void StartMod()
+		public void StartMod(IModEnvironment modEnvironment)
 		{
 			new Harmony("Mod:ToolShortcuts").PatchAll();
 		}
@@ -22,6 +22,8 @@ namespace ToolShortcuts
 			{
 				//Adds keybindings for tools:
 				containerDefinition.Bind<KeybindingRebindLabelUpdater>().AsSingleton();
+				// Extract game services (as hacky as the one below).
+				containerDefinition.Bind<GameDependencyExtractorSingleton>().AsSingleton();
 			}
 		}
 		

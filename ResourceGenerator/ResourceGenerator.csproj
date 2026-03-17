@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>exe</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
-		<ImplicitUsings>true</ImplicitUsings>
+		<ImplicitUsings>false</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	

@@ -8,10 +8,10 @@ namespace ToolShortcuts.ToolSystem
 {
 	public static class ToolManagerPatch
 	{
-		[HarmonyPatch(typeof(ToolManager), nameof(ToolManager.ProcessInput))]
+		[HarmonyPatch(typeof(ToolService), nameof(ToolService.ProcessInput))]
 		public static class PatchProcessInput
 		{
-			public static void Postfix(ref bool? __result, ToolManager __instance)
+			public static void Postfix(ref bool? __result, ToolService __instance)
 			{
 				var toolIndex = IsToolIndexKeybindingDown(__instance._inputService);
 				if(toolIndex != null)
@@ -23,10 +23,10 @@ namespace ToolShortcuts.ToolSystem
 				}
 			}
 			
-			private static bool SwitchTool(int toolIndex, ToolManager instance)
+			private static bool SwitchTool(int toolIndex, ToolService instance)
 			{
 				var activeToolGroupButtons = ActiveToolGroupTrackingPatch.activeToolGroupButtons;
-				if(activeToolGroupButtons != null && toolIndex < activeToolGroupButtons.Count())
+				if(activeToolGroupButtons != null && toolIndex < activeToolGroupButtons.Count)
 				{
 					var tool = activeToolGroupButtons.ElementAt(toolIndex).Tool;
 					instance.SwitchTool(tool);

@@ -1,5 +1,6 @@
 using HarmonyLib;
 using System.Collections.Generic;
+using Timberborn.ToolButtonSystem;
 using Timberborn.ToolSystem;
 
 namespace ToolShortcuts.LabelStuff
@@ -9,14 +10,14 @@ namespace ToolShortcuts.LabelStuff
 		[HarmonyPatch(typeof(ToolGroupButton), nameof(ToolGroupButton.OnToolGroupEntered))]
 		public static class PatchToolGroupButtonToolLabelsEntered
 		{
-			public static void Postfix(ToolGroupEnteredEvent toolGroupEnteredEvent, ToolGroupButton __instance, IReadOnlyList<ToolButton> ____toolButtons)
+			public static void Postfix(ToolGroupEnteredEvent toolGroupOpenedEvent, ToolGroupButton __instance, IReadOnlyList<ToolButton> ____toolButtons)
 			{
-				if (toolGroupEnteredEvent.ToolGroup != __instance._toolGroup)
+				if (toolGroupOpenedEvent.ToolGroup != __instance._toolGroup)
 				{
 					return; //Event is received on all buttons, filter to the current one.
 				}
 				
-				ToolButtonLabelHelper.addCustomToolIndexKeybindingLabel(__instance._toolGroupManager._inputService._keyBindingRegistry, ____toolButtons);
+				ToolButtonLabelHelper.addCustomToolIndexKeybindingLabel(__instance._toolGroupService._inputService._keyBindingRegistry, ____toolButtons);
 			}
 		}
 		

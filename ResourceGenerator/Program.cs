@@ -1,4 +1,8 @@
-﻿using Timberborn.KeyBindingSystem;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Timberborn.KeyBindingSystem;
 using ToolShortcuts.Keybindings;
 
 namespace ResourceGenerator;
@@ -61,6 +65,7 @@ public static class Program
 			new (KeybindingKeys.BuildingTools.Metal, "metal", "Metal", null),
 			new (KeybindingKeys.BuildingTools.Power, "power", "Power", null),
 			new (KeybindingKeys.BuildingTools.Science, "science", "Science", null),
+			new (KeybindingKeys.BuildingTools.Automation, "automation", "Automation", null),
 			new (KeybindingKeys.BuildingTools.Wellbeing, "well_being", "Well-being", null),
 			new (KeybindingKeys.BuildingTools.Decoration, "decoration", "Decoration", null),
 			new (KeybindingKeys.BuildingTools.Monuments, "monuments", "Monuments", null),
@@ -83,6 +88,14 @@ public static class Program
 			new (KeybindingKeys.ToolIndex.Index14, "index_14", "Index 14", null),
 			new (KeybindingKeys.ToolIndex.Index15, "index_15", "Index 15", null),
 			new (KeybindingKeys.ToolIndex.Index16, "index_16", "Index 16", null),
+			new (KeybindingKeys.ToolIndex.Index17, "index_17", "Index 17", null),
+			new (KeybindingKeys.ToolIndex.Index18, "index_18", "Index 18", null),
+			new (KeybindingKeys.ToolIndex.Index19, "index_19", "Index 19", null),
+			new (KeybindingKeys.ToolIndex.Index20, "index_20", "Index 20", null),
+			new (KeybindingKeys.ToolIndex.Index21, "index_21", "Index 21", null),
+			new (KeybindingKeys.ToolIndex.Index22, "index_22", "Index 22", null),
+			new (KeybindingKeys.ToolIndex.Index23, "index_23", "Index 23", null),
+			new (KeybindingKeys.ToolIndex.Index24, "index_24", "Index 24", null),
 		}),
 	};
 	
@@ -91,7 +104,7 @@ public static class Program
 		var resourceFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "res");
 		if (!Directory.Exists(resourceFolderPath))
 		{
-			Console.WriteLine("'Res' folder does not exist. Make sure to set working directory to Git root folder.");
+			Console.WriteLine("'res' folder does not exist. Make sure to set working directory to Git root folder.");
 			return;
 		}
 		var blueprintsFolderPath = Path.Combine(resourceFolderPath, "Blueprints");
@@ -101,14 +114,14 @@ public static class Program
 			Directory.Delete(blueprintsFolderPath, true);
 		}
 		Directory.CreateDirectory(blueprintsFolderPath);
-
+		
 		var localizationEntries = new List<(string id, string value, string comment)>();
 		
 		var currentGroupIndex = firstGroupOrderIndex;
 		foreach (var group in groups)
 		{
 			localizationEntries.Add((group.localizationKey, group.defaultTranslation, "group"));
-			var groupFilePath = Path.Combine(blueprintsFolderPath, $"{group.id}.json");
+			var groupFilePath = Path.Combine(blueprintsFolderPath, $"{group.id}.blueprint.json");
 			File.WriteAllText(groupFilePath, $$"""
 				{
 					"KeyBindingGroupSpec": {
@@ -124,7 +137,7 @@ public static class Program
 			foreach (var binding in group.bindings)
 			{
 				localizationEntries.Add((binding.localizationKey, binding.defaultTranslation, "binding"));
-				var bindingFilePath = Path.Combine(blueprintsFolderPath, $"{binding.id}.json");
+				var bindingFilePath = Path.Combine(blueprintsFolderPath, $"{binding.id}.blueprint.json");
 				var primary = !binding.keybinding.HasValue ? "" : $$"""
 					,
 						"PrimaryInputBindingSpec": {

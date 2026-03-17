@@ -18,6 +18,9 @@ namespace ToolShortcuts.Settings
 		{
 			public static void Postfix(SettingsBox __instance, VisualElement ____root, VisualElementLoader ____visualElementLoader)
 			{
+				// Debug.Log("Debugging visual element:");
+				// debugVisualElement(____root, "");
+				
 				var settingsParent = extractSettingsRoot(____root);
 				
 				var header = addHeader(settingsParent, "Mod.ToolShortcuts.Header", KeybindingKeys.LocalizationUIPrefix + "tool_shortcuts_settings_title");
@@ -38,9 +41,18 @@ namespace ToolShortcuts.Settings
 				lastToggle = toggle;
 			}
 			
+			// private static void debugVisualElement(VisualElement e, string prefix)
+			// {
+			// 	Debug.Log($"{prefix}- '{e.name}'");
+			// 	foreach (var child in e.hierarchy.Children())
+			// 	{
+			// 		debugVisualElement(child, $"{prefix}  ");
+			// 	}
+			// }
+			
 			private static VisualElement extractSettingsRoot(VisualElement settingsBox)
 			{
-				var savingsHeader = settingsBox.Q("SavingHeader");
+				var savingsHeader = settingsBox.Q("SoundHeader");
 				if (savingsHeader == null)
 				{
 					throw new Exception("Did not find the 'SavingHeader' element in 'SettingsBox'");
